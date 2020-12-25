@@ -162,18 +162,30 @@ class InsertClass extends DatabaseConnection
 
 		}
 
-		public function rattinginput(){
+		public function rattinginput($data,$student_id,$course_id){
 		
-		/*	$name = mysqli_real_escape_string($this->con, $data['name']);
-			$email = mysqli_real_escape_string($this->con, $data['email']);
-			$newhit = mysqli_real_escape_string($this->con, $data['rathit']);
-			$review = mysqli_real_escape_string($this->con, $data['review']);
 			 
-			$query = "SELECT * FROM tbl_product WHERE pro_id=$prid";
-			$result = self::select($query);
+			$newhit = mysqli_real_escape_string($this->db, $data['rating']);
+			$testque = "SELECT * FROM ratecheck_table WHERE course_id=$course_id AND student_id=$student_id";
+			$checkrate = $this->queryfunk($testque);
+			 
+			
+					if (mysqli_num_rows($checkrate)>0) {
+echo "ALREADY RATED";
+					}else{
+
+				
+
+
+
+
+
+			 
+			$query = "SELECT * FROM course_table WHERE course_id=$course_id";
+			$result = $this->queryfunk_help($query);
 			$getd = $result->fetch_assoc();
-			$prehit = $getd['rat_hit'];
-			$avgrat = $getd['rat_avg'];
+			$prehit = $getd['rat_total'];
+			$avgrat = $getd['rat_hit'];
 
 
 			$presenthit = number_format($prehit)+($newhit);
@@ -189,11 +201,11 @@ class InsertClass extends DatabaseConnection
 				$msg = "Field must not be empty";
 				return $msg;
 			}else{
-			$sql = "INSERT INTO tbl_review(name,email,review,product_id)VALUES('$name','$email','$review','$prid')";
-			$sqls= "UPDATE tbl_product SET rat_hit = '$presenthit', rat_avg = '$avgratcheck' WHERE pro_id = '$prid'";
-			$insert_row = self::insertQuery($sql);
+			$sql = "INSERT INTO ratecheck_table(student_id,course_id)VALUES('$student_id','$course_id')";
+			$sqls= "UPDATE course_table SET rat_total = '$presenthit', rat_hit = '$avgratcheck' WHERE course_id = '$course_id'";
+			$insert_row = $this->queryfunk($sql);
 		 
-			$insertss = self::insertQuery($sqls);
+			$insertss = $this->queryfunk($sqls);
 			if ($insert_row) {
 					
 					$message = "<span style='color:green;'>post inserted</span>";
@@ -204,8 +216,8 @@ class InsertClass extends DatabaseConnection
 				}
 
 			}
-*/
-			
+
+				}
 		}
 
 
