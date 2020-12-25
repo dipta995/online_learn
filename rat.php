@@ -45,7 +45,7 @@ article {
 
 </style>
 <?php if ($_SERVER['REQUEST_METHOD']=='POST' && $_POST['ratsubmit']) {
-  $senddata->rattinginput();
+  $senddata->rattinginput($_POST,$student_id,$_GET['playlistid']);
 } ?>
 <form action="" method="post">
   <div class="star-rating">
